@@ -1,0 +1,30 @@
+<div class="holder padding-zero">
+  <div ng-if="WidgetSingle.video.uri" class="media-center-plugin layout1">
+    <div class="media-center-banner clearfix border-bottom-grey">
+      <div class="plugin-slider text-center">
+        <div class="plugin-slide"
+             data-ng-attr-load-iframe="{{WidgetSingle.video.uri | returnVimeoUrl}}">
+          <img src="../../../styles/media/holder-16x9.gif">
+        </div>
+      </div>
+    </div>
+    <div class="text-left padded padding-bottom-zero clearfix ">
+      <h4 class="margin-top-zero" style="font-size: 16px">{{WidgetSingle.video
+        .name}}</h4>
+    </div>
+    <div class="padded padding-top-zero">
+      <hr class="small">
+      <div class="link-list">
+        <a class="text-primary" href='javascript:void(0);'
+           ng-click="WidgetSingle.viewSource(WidgetSingle.data.content.rssUrl)">
+          View Source
+        </a>
+        <a class="text-primary">Share</a>
+      </div>
+      <hr class="small">
+      <p class="break-word">
+        {{WidgetSingle.video.description}}
+      </p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,35 @@
+<div
+     class="holder padding-zero">
+  <div class="media-center-plugin layout3" id="scroll-infinite">
+    <div class="plugin-banner clearfix">
+      <div id="carousel" build-fire-carousel=""
+           ng-style="WidgetFeed.data.content.carouselImages.length > 0 ? {'min-height': (9 * deviceWidth / 16) + 'px' } : {}"></div>
+    </div>
+    <div ng-if="WidgetFeed.showDescription(WidgetFeed.data.content.description)" class="padded text-left">
+      <p class="margin-bottom-zero break-word"
+         ng-bind-html='WidgetFeed.safeHtml(WidgetFeed.data.content.description)'></p>
+    </div>
+    <div  ng-if="WidgetFeed.data" infinite-scroll="WidgetFeed.loadMore()"
+          infinite-scroll-distance="1"
+          data-infinite-container=".infinite-scroll-parent"
+          infinite-scroll-disabled="WidgetFeed.busy">
+      <div ng-repeat="video in WidgetFeed.videos" trigger-ng-repeat-render>
+        <div class="plugin-banner clearfix">
+          <div class="plugin-slide text-center" data-ng-attr-load-iframe="{{video.uri | returnVimeoUrl}}">
+            <img src="../../../styles/media/holder-16x9.gif">
+          </div>
+        </div>
+        <div class="padded text-left">
+          <a class="text-primary"
+             href="javascript:void(0)"
+             ng-click="WidgetFeed.openDetailsPage(video)">{{video.name}}</a>
+
+          <p class="margin-bottom-zero break-word"
+             style="max-width: 310px">{{video.description |
+            limitTo:220}}{{(video.description.length >220) && "..." || ""}}</p>
+          <span class="list-item-date">{{video.created_time | date}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

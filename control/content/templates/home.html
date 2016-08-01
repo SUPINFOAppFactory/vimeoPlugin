@@ -1,0 +1,94 @@
+<div class="item clearfix row">
+  <div class="labels col-md-3 padding-right-zero pull-left">
+    <span>Content Type</span>
+  </div>
+  <div class="main pull-right col-md-9 padding-left-zero row">
+    <div class="radio radio-primary radio-inline">
+      <input id="channel" type="radio" ng-model="ContentHome.contentType"
+             ng-value="ContentHome.CONTENT_TYPE.CHANNEL_FEED"
+             name="contenttype" ng-se="">
+      <label for="channel">Channel Feed</label>
+    </div>
+    <div class="radio radio-primary radio-inline">
+      <input id="user" type="radio" ng-model="ContentHome.contentType"
+             ng-value="ContentHome.CONTENT_TYPE.USER_FEED"
+             name="contenttype">
+      <label for="user">User Feed</label>
+    </div>
+    <div class="radio radio-primary radio-inline">
+      <input id="video" type="radio" ng-model="ContentHome.contentType"
+             ng-value="ContentHome.CONTENT_TYPE.SINGLE_VIDEO"
+             name="contenttype">
+      <label for="video">Single Video</label>
+    </div>
+  </div>
+</div>
+<hr class="none">
+<div class="item clearfix row">
+  <div class="labels col-md-3 padding-right-zero pull-left">
+    <span>URL</span>
+  </div>
+  <div class="main pull-right col-md-9 padding-left-zero row">
+    <div class="pull-left col-md-8 padding-zero">
+      <input type="text" class="form-control"
+             placeholder="Enter your channel or video URL"
+             ng-model="ContentHome.rssLink"
+             ng-change="ContentHome.clearData()">
+    </div>
+    <div class="col-md-4 pull-right">
+      <button class="btn btn-primary pull-right stretch"
+              ng-disabled="!(ContentHome.rssLink)"
+              ng-click="ContentHome.validateRssLink()">
+        Validate
+      </button>
+    </div>
+  </div>
+</div>
+<div ng-if="ContentHome.validLinkSuccess || ContentHome.validLinkFailure">
+  <hr class="none">
+  <div class="item clearfix row">
+    <div class="main pull-right col-md-9">
+      <div class="alert alert-success alert-sm text-center"
+           ng-show="ContentHome.validLinkSuccess">Feed
+        successfully validated
+      </div>
+      <div class="alert alert-danger alert-sm text-center"
+           ng-show="ContentHome.validLinkFailure">{{ContentHome.failureMessage}}
+      </div>
+    </div>
+  </div>
+</div>
+<hr class="none">
+<div class="item clearfix row">
+  <div ng-switch="ContentHome.contentType" class="main pull-right col-md-9">
+    <p ng-switch-when="Channel Feed">Channel Feed Example: <a
+        href="https://vimeo.com/channels/pmg" target="_blank">https://vimeo.com/channels/pmg</a>
+    </p>
+
+    <p ng-switch-when="User Feed">User Feed Example: <a
+        href="http://vimeo.com/gopro" target="_blank">http://vimeo.com/gopro</a>
+    </p>
+
+    <p ng-switch-when="Single Video">Single Video Example: <a
+        href="https://vimeo.com/130824206" target="_blank">https://vimeo.com/130824206</a>
+    </p>
+  </div>
+</div>
+<hr ng-hide="ContentHome.contentType == ContentHome.CONTENT_TYPE.SINGLE_VIDEO">
+<div id="carousel" ng-hide="ContentHome.contentType == ContentHome.CONTENT_TYPE.SINGLE_VIDEO"></div>
+<hr ng-hide="ContentHome.contentType == ContentHome.CONTENT_TYPE.SINGLE_VIDEO">
+<div class="item clearfix row"
+     ng-hide="ContentHome.contentType == ContentHome.CONTENT_TYPE.SINGLE_VIDEO">
+  <div class="labels col-md-3 padding-right-zero pull-left">
+    <span>Text</span>
+  </div>
+</div>
+<hr class="none" ng-hide="ContentHome.contentType == ContentHome.CONTENT_TYPE.SINGLE_VIDEO">
+<div class="item clearfix row" ng-hide="ContentHome.contentType == ContentHome.CONTENT_TYPE.SINGLE_VIDEO">
+  <div class="main col-md-12 pull-left">
+    <textarea id="text" rows="5" width="100%" class="form-control"
+              ui-tinymce="ContentHome.descriptionWYSIWYGOptions"
+              ng-model="ContentHome.data.content.description"
+              placeholder="WYSIWYG"></textarea>
+  </div>
+</div>
